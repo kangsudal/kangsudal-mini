@@ -1,16 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kangsudal_mini/state/page_index.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
+  static const TextStyle optionStyle = TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: 내자산',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: 더보기',
+      style: optionStyle,
+    ),
+  ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    int selectedIndex = ref.watch(bottomNavigatorSelectedIndex);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: HomeAppBar(),
+        body: Center(child: _widgetOptions.elementAt(selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
@@ -32,6 +55,12 @@ class HomeScreen extends StatelessWidget {
               label: '더보기',
             ),
           ],
+          onTap: (int selectedIdx) {
+            ref
+                .read(bottomNavigatorSelectedIndex.notifier)
+                .update((state) => selectedIdx);
+          },
+          currentIndex: selectedIndex,
         ),
       ),
     );
