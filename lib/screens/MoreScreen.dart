@@ -11,6 +11,7 @@ class MoreScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            backgroundColor: Colors.black,
             automaticallyImplyLeading: false,
             title: Text('더보기'),
             actions: [
