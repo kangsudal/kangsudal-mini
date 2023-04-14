@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.4.0
   flutter_riverpod: ^2.3.4
+  chat_bubbles: ^1.4.1
 
 dev_dependencies:
   flutter_test:
