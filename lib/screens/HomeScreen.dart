@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kangsudal_mini/screens/AuthScreen.dart';
+import 'package:kangsudal_mini/screens/CreateAccountScreen.dart';
 import 'package:kangsudal_mini/screens/MoreScreen.dart';
 import 'package:kangsudal_mini/state/page_index.dart';
 
@@ -108,11 +109,115 @@ class ScaffoldOptions extends ConsumerWidget {
         backgroundColor: Colors.black,
         appBar: HomeAppBar(),
         body: ListView(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 40,
+          ),
           children: [
-            Center(
-              child: const Text(
-                'Index 0: Home',
-                style: optionStyle,
+            PurpleCard(),
+            SizedBox(
+              height: 75,
+            ),
+            horizontalServices(context),
+            SizedBox(
+              height: 55,
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AuthScreen(),
+                  ),
+                );
+              },
+              leading: FaIcon(
+                FontAwesomeIcons.seedling,
+                color: Colors.green,
+              ),
+              title: Text(
+                '1주를 완성해 보세요!',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              trailing: FaIcon(
+                FontAwesomeIcons.angleRight,
+                color: Colors.white,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(20),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.white12,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: '국내, 해외주식을\n',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: '천원부터 ',
+                        ),
+                        TextSpan(
+                          text: '원하는 금액만큼!',
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.cartShopping,
+                    size: 100,
+                    color: Colors.redAccent,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AuthScreen(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: Colors.white24,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      // width: 100,
+                      height: 50,
+                      child: Center(
+                        child: Text(
+                          '소수점 주식 보기',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -128,6 +233,275 @@ class ScaffoldOptions extends ConsumerWidget {
     } else {
       return Scaffold();
     }
+  }
+
+  Container horizontalServices(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 100,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.seedling,
+                  color: Colors.green,
+                ),
+                Text(
+                  '천원부터',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.calendar,
+                  color: Colors.grey,
+                ),
+                Text(
+                  '천원부터',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.gift,
+                  color: Colors.deepPurpleAccent,
+                ),
+                Text(
+                  '선물함',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.ticket,
+                  color: Colors.teal,
+                ),
+                Text(
+                  '쿠폰함',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.champagneGlasses,
+                  color: Colors.amber,
+                ),
+                Text(
+                  '이벤트',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.seedling,
+                  color: Colors.green,
+                ),
+                Text(
+                  '천원부터',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.calendar,
+                  color: Colors.grey,
+                ),
+                Text(
+                  '천원부터',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.gift,
+                  color: Colors.deepPurpleAccent,
+                ),
+                Text(
+                  '선물함',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.ticket,
+                  color: Colors.teal,
+                ),
+                Text(
+                  '쿠폰함',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.champagneGlasses,
+                  color: Colors.amber,
+                ),
+                Text(
+                  '이벤트',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PurpleCard extends StatelessWidget {
+  const PurpleCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 250,
+      decoration: BoxDecoration(
+        color: Colors.purple,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '항상 멀리 내다봐라.',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            '워렌 버핏',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AuthScreen(),
+                ),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 18),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              // width: 100,
+              height: 50,
+              child: Center(
+                child: Text(
+                  '로그인',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // SizedBox(height: 8,),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CreateAccountScreen(),
+                ),
+              );
+            },
+            child: Text(
+              'K-mini가 처음이신가요?',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
