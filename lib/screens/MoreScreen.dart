@@ -6,6 +6,7 @@ class MoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double sliverHorizontalGaps = 25;
     return Scaffold(
       backgroundColor: Colors.black,
       body: CustomScrollView(
@@ -22,12 +23,15 @@ class MoreScreen extends StatelessWidget {
             ],
           ),
           SliverPadding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              vertical: 10,
+            ),
             sliver: SliverToBoxAdapter(
               child: Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 10,
-                  vertical: 13,
+                  vertical: 20,
                 ),
                 decoration: BoxDecoration(
                   color: Colors.white10,
@@ -38,12 +42,31 @@ class MoreScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'K-mini 시작하기 >',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'K-mini 시작하기 >',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            child: Text(
+                              '로그인',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 10),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(

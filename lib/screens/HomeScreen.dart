@@ -13,182 +13,88 @@ class HomeScreen extends ConsumerWidget {
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
-  final List<Widget> _bodyOptions = <Widget>[
-    const Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    const Text(
-      'Index 1: 내자산',
-      style: optionStyle,
-    ),
-    const Text(
-      'Index 2: 더보기',
-      style: optionStyle,
-    ),
-  ];
-
-  final List<Widget> _appBarOptions = [
-    Container(
-      color: Colors.blue,
-      height: 100,
-      child: Column(
-        children: [
-          ListTile(
-            dense: true,
-            visualDensity: VisualDensity(vertical: 2),
-            leading: const Text(
-              'K-mini',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            trailing: Container(
-              height: 50,
-              width: 50,
-              color: Colors.red,
-              child: Row(
-                children: const [
-                  FaIcon(
-                    FontAwesomeIcons.bullhorn,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  FaIcon(
-                    FontAwesomeIcons.bell,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-              child: Container(
-            color: Colors.grey,
-          )),
-        ],
-      ),
-    ),
-    Container(
-      color: Colors.amber,
-      height: 100,
-      child: Column(
-        children: [
-          ListTile(
-            dense: true,
-            visualDensity: VisualDensity(vertical: 2),
-            leading: Text(
-              'K-mini',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            trailing: Container(
-              height: 50,
-              width: 50,
-              color: Colors.red,
-              child: Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.bullhorn,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  FaIcon(
-                    FontAwesomeIcons.bell,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-              child: Container(
-            color: Colors.grey,
-          )),
-        ],
-      ),
-    ),
-    Container(
-      color: Colors.teal,
-      height: 50,
-      child: ListTile(
-        dense: true,
-        visualDensity: VisualDensity(vertical: 2),
-        leading: Text(
-          'K-mini',
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        trailing: Container(
-          height: 50,
-          width: 30,
-          color: Colors.red,
-          child: Icon(
-            Icons.settings,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int selectedIndex = ref.watch(bottomNavigatorSelectedIndex);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
-        // appBar: HomeAppBar(),
         body: ScaffoldOptions(selectedIndex: selectedIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.house,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 1,
               ),
-              label: '홈',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.wallet,
+            ],
+          ),
+          child: BottomNavigationBar(
+            backgroundColor: Colors.black,
+            items: const [
+              BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.house,
+                ),
+                label: '홈',
               ),
-              label: '내자산',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.more_horiz,
+              BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.wallet,
+                ),
+                label: '내자산',
               ),
-              label: '더보기',
-            ),
-          ],
-          onTap: (int selectedIdx) {
-            //내자산 탭을 눌렀을때 로그인 상태가 아니면 탭을 바꾸지않고 인증페이지로 이동한다.
-            if (selectedIdx == 1) {
-              if (!ref.watch(isLogin)) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AuthScreen(),
-                  ),
-                );
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.more_horiz,
+                ),
+                label: '더보기',
+              ),
+            ],
+            onTap: (int selectedIdx) {
+              //내자산 탭을 눌렀을때 로그인 상태가 아니면 탭을 바꾸지않고 인증페이지로 이동한다.
+              if (selectedIdx == 1) {
+                if (!ref.watch(isLogin)) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AuthScreen(),
+                    ),
+                  );
+                }
+              } else {
+                //로그인 상태면 탭을 바꿔준다.
+                ref
+                    .read(bottomNavigatorSelectedIndex.notifier)
+                    .update((state) => selectedIdx);
               }
-            } else {
-              //로그인 상태면 탭을 바꿔준다.
-              ref
-                  .read(bottomNavigatorSelectedIndex.notifier)
-                  .update((state) => selectedIdx);
-            }
-          },
-          currentIndex: selectedIndex,
+            },
+            currentIndex: selectedIndex,
+            unselectedItemColor: Colors.grey,
+            selectedItemColor: _selectedColor(selectedIndex),
+          ),
         ),
       ),
     );
   }
+
+  Color _selectedColor(int selectedIndex) {
+    if (selectedIndex == 0) {
+      return Colors.tealAccent;
+    } else if (selectedIndex == 1) {
+      return Colors.deepPurpleAccent;
+    } else {
+      return Colors.indigo;
+    }
+  }
 }
 
 class ScaffoldOptions extends ConsumerWidget {
-  int selectedIndex;
+  final int selectedIndex;
 
-  ScaffoldOptions({Key? key, required this.selectedIndex}) : super(key: key);
+  const ScaffoldOptions({
+    Key? key,
+    required this.selectedIndex,
+  }) : super(key: key);
   static const TextStyle optionStyle = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.bold,
@@ -199,6 +105,7 @@ class ScaffoldOptions extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     if (selectedIndex == 0) {
       return Scaffold(
+        backgroundColor: Colors.black,
         appBar: HomeAppBar(),
         body: ListView(
           children: [
@@ -232,6 +139,7 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.black,
       automaticallyImplyLeading: false,
       leadingWidth: 0,
       title: GestureDetector(
