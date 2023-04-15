@@ -42,3 +42,56 @@ https://kangsudal-mini.web.app/#/
 
 <br/>
 <br/>
+
+### 기억해두고싶은 코드들
+**검색기능**
+```
+  List items1 = [];
+  List items2 = [];
+  List<String> resultItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    //초기데이터 설정
+    items1 = koreaStockList;
+    items2 = abroadStockList;
+
+    _controller.addListener(() {
+      String searchWord = _controller.text;
+      List<String> resultItems1 = koreaStockList.where((element) {
+        return element.contains(searchWord);
+      }).toList();
+
+      List<String> resultItems2 = abroadStockList.where((element) {
+        return element.contains(searchWord);
+      }).toList();
+
+      setState(() {
+        resultItems = resultItems1 + resultItems2;
+        print(resultItems);
+      });
+    });
+  }
+```
+<br/>
+**찜한주식에서 상세페이지로 넘어갈때 넘겨주는 객체**
+```
+class Stock {
+  double price;
+  String name;
+  double updownPrice;
+  double updownPercent;
+  bool isUp;
+  String ticker;
+
+  Stock({
+    required this.name,
+    required this.price,
+    required this.updownPrice,
+    required this.updownPercent,
+    required this.isUp,
+    required this.ticker,
+  });
+}
+```
