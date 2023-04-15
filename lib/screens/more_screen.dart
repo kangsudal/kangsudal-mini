@@ -56,20 +56,29 @@ class MoreScreen extends ConsumerWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => CreateAccountScreen(),
-                              ),
-                            ),
-                            child: Text(
-                              'K-mini 시작하기 >',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
+                          ref.watch(isLogin) == true
+                              ? Text(
+                                  '강수경님',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                )
+                              : GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CreateAccountScreen(),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'K-mini 시작하기 >',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
                           GestureDetector(
                             onTap: () {
                               if (ref.watch(isLogin) == false) {
