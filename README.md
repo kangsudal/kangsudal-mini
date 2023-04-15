@@ -80,12 +80,13 @@ https://kangsudal-mini.web.app/#/
 
 ```
 class Stock {
-  double price;
-  String name;
-  double updownPrice;
-  double updownPercent;
-  bool isUp;
-  String ticker;
+  double price; //현재가격
+  String name; //주식이름
+  double updownPrice; //등락금액
+  double updownPercent; //등락률
+  bool isUp; //상승세인지
+  String ticker; //주식 ticker
+  bool isKor; //한국주식인지
 
   Stock({
     required this.name,
@@ -94,6 +95,11 @@ class Stock {
     required this.updownPercent,
     required this.isUp,
     required this.ticker,
+    required this.isKor,
   });
 }
+
 ```
+
+isUp => DetailScreen의 그래프 색상, caret 아이콘 방향, 등락금액(등락률) 텍스트 색상 결정
+isKor => DetailScreen의 $와 원 표시 결정
