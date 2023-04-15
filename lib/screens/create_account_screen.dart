@@ -1,5 +1,6 @@
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
+import 'package:kangsudal_mini/screens/home_screen.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
@@ -194,7 +195,13 @@ class CreateAccountScreen extends StatelessWidget {
             left: 15,
             right: 15,
             child: GestureDetector(
-              onTap: (){print('Clicked.');},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,

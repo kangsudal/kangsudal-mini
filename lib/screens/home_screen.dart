@@ -124,13 +124,6 @@ class ScaffoldOptions extends ConsumerWidget {
               height: 55,
             ),
             ListTile(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AuthScreen(),
-                  ),
-                );
-              },
               leading: FaIcon(
                 FontAwesomeIcons.seedling,
                 color: Colors.green,

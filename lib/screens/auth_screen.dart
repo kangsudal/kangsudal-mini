@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kangsudal_mini/screens/create_account_screen.dart';
 import 'package:kangsudal_mini/state/page_index.dart';
 
 class AuthScreen extends ConsumerWidget {
@@ -37,10 +38,17 @@ class AuthScreen extends ConsumerWidget {
                     endIndent: 15,
                     color: Colors.white,
                   ),
-                  Text(
-                    'KB증권 계좌개설',
-                    style: TextStyle(
-                      color: Colors.grey,
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CreateAccountScreen(),
+                      ),
+                    ),
+                    child: Text(
+                      'KB증권 계좌개설',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
                 ],
