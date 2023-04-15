@@ -74,9 +74,10 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text('소수점 종목 검색'),
+        backgroundColor: Colors.black,
       ),
       body: DefaultTabController(
         length: 2,
@@ -89,10 +90,26 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
               children: [
                 TextField(
                   controller: _controller,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                   decoration: InputDecoration(
                     hintText: '종목명을 입력해 주세요.',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 10),
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Theme.of(context).primaryColor,
+                      ),
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
@@ -102,6 +119,9 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                         child: Column(
                           children: [
                             TabBar(
+                              indicatorColor: Theme.of(context).primaryColor,
+                              unselectedLabelColor: Colors.white,
+                              labelColor: Theme.of(context).primaryColor,
                               tabs: [
                                 Tab(
                                   text: '국내소수점',
@@ -119,7 +139,12 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                                         .map(
                                           (e) => ListTile(
                                             leading: CircleAvatar(),
-                                            title: Text(e),
+                                            title: Text(
+                                              e,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                           ),
                                         )
                                         .toList(),
@@ -129,7 +154,12 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                                         .map(
                                           (e) => ListTile(
                                             leading: CircleAvatar(),
-                                            title: Text(e),
+                                            title: Text(
+                                              e,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                           ),
                                         )
                                         .toList(),
@@ -145,7 +175,12 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                           children: resultItems
                               .map(
                                 (e) => ListTile(
-                                  title: Text(e),
+                                  title: Text(
+                                    e,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               )
                               .toList(),
