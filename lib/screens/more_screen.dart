@@ -36,7 +36,7 @@ class MoreScreen extends StatelessWidget {
                   vertical: 20,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white10,
+                  color: Colors.white12,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(

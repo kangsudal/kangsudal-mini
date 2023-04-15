@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kangsudal_mini/state/page_index.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends ConsumerWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -71,11 +73,17 @@ class AuthScreen extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(
-                    '간편인증 로그인',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                  child: GestureDetector(
+                    child: Text(
+                      '간편인증 로그인',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
+                    onTap: () {
+                      ref.read(isLogin.notifier).update((state) => true);
+                      Navigator.of(context).pop();
+                    },
                   ),
                 ),
               ],

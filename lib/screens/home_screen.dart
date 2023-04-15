@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:kangsudal_mini/screens/auth_screen.dart';
+import 'package:kangsudal_mini/screens/bookmark_screen.dart';
 import 'package:kangsudal_mini/screens/create_account_screen.dart';
+import 'package:kangsudal_mini/screens/decimal_point_stock_screen.dart';
 import 'package:kangsudal_mini/screens/more_screen.dart';
 import 'package:kangsudal_mini/state/page_index.dart';
 
@@ -41,9 +44,9 @@ class HomeScreen extends ConsumerWidget {
               ),
               BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.wallet,
+                  FontAwesomeIcons.chartLine,
                 ),
-                label: '내자산',
+                label: '찜한주식',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -54,14 +57,12 @@ class HomeScreen extends ConsumerWidget {
             ],
             onTap: (int selectedIdx) {
               //내자산 탭을 눌렀을때 로그인 상태가 아니면 탭을 바꾸지않고 인증페이지로 이동한다.
-              if (selectedIdx == 1) {
-                if (!ref.watch(isLogin)) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AuthScreen(),
-                    ),
-                  );
-                }
+              if (selectedIdx == 1 && ref.watch(isLogin) == false) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AuthScreen(),
+                  ),
+                );
               } else {
                 //로그인 상태면 탭을 바꿔준다.
                 ref
@@ -114,7 +115,7 @@ class ScaffoldOptions extends ConsumerWidget {
             vertical: 40,
           ),
           children: [
-            PurpleCard(),
+            ref.watch(isLogin) ? LogInedCard() : PurpleCard(),
             SizedBox(
               height: 75,
             ),
@@ -193,7 +194,7 @@ class ScaffoldOptions extends ConsumerWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AuthScreen(),
+                          builder: (context) => DecimalPointStockScreen(),
                         ),
                       );
                     },
@@ -224,14 +225,10 @@ class ScaffoldOptions extends ConsumerWidget {
         ),
       );
     } else if (selectedIndex == 1) {
-      if (!ref.watch(isLogin)) {
-        return Scaffold();
-      }
-      return Scaffold();
-    } else if (selectedIndex == 2) {
-      return MoreScreen();
+      return BookMarkScreen();
     } else {
-      return Scaffold();
+      //if (selectedIndex == 2)
+      return MoreScreen();
     }
   }
 
@@ -501,6 +498,187 @@ class PurpleCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class LogInedCard extends StatefulWidget {
+  const LogInedCard({Key? key}) : super(key: key);
+
+  @override
+  State<LogInedCard> createState() => _LogInedCardState();
+}
+
+class _LogInedCardState extends State<LogInedCard> {
+  bool _notifications = true;
+  int _totalValue = 5770000;
+  var f = NumberFormat('###,###,###,###');
+  String customerName = '강수경';
+
+  void _onNotificationsChanged(bool? newCheckValue) {
+    if (newCheckValue == null) return;
+    setState(() {
+      _notifications = newCheckValue;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '총 자산',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ),
+              Switch(
+                value: _notifications,
+                onChanged: _onNotificationsChanged,
+                inactiveTrackColor: Colors.white60,
+                activeColor: Theme.of(context).primaryColor,
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: _notifications
+                ? Text(
+                    f.format(_totalValue),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                    ),
+                  )
+                : Text(
+                    '총자산 금액 숨김',
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontSize: 25,
+                    ),
+                  ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width,
+            // height: 100,
+            decoration: BoxDecoration(
+              color: Colors.white12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '$customerName님의',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            '투자가능금액',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    TextButton(
+                      child: Text(
+                        '충전',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                Container(
+                  // color: Colors.grey,
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          width: MediaQuery.of(context).size.width,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Color(0xff424a63),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Text(
+                              '800,000원',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          width: MediaQuery.of(context).size.width * 0.27,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Colors.yellow.shade700,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        top: 10,
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.yellow,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              '₩',
+                              style: TextStyle(
+                                fontSize: 30,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
