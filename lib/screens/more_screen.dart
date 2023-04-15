@@ -6,7 +6,13 @@ import 'package:kangsudal_mini/screens/create_account_screen.dart';
 import 'package:kangsudal_mini/state/page_index.dart';
 
 class MoreScreen extends ConsumerWidget {
-  const MoreScreen({Key? key}) : super(key: key);
+  MoreScreen({Key? key}) : super(key: key);
+
+  List<String> items = [
+    '해외주식 배당 내역',
+    '해외주식 배당옵션',
+    '양도소득세 조회/신청',
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,6 +22,7 @@ class MoreScreen extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            pinned: true,
             backgroundColor: Colors.black,
             automaticallyImplyLeading: false,
             title: Text('더보기'),
@@ -71,8 +78,10 @@ class MoreScreen extends ConsumerWidget {
                                     builder: (context) => AuthScreen(),
                                   ),
                                 );
-                              }else{
-                                ref.read(isLogin.notifier).update((state) => false);
+                              } else {
+                                ref
+                                    .read(isLogin.notifier)
+                                    .update((state) => false);
                               }
                             },
                             child: Container(
@@ -187,8 +196,262 @@ class MoreScreen extends ConsumerWidget {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+            ),
+            sliver: SliverPersistentHeader(
+                delegate: CustomDelegate(), pinned: true),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              // vertical: 10,
+            ),
+            sliver: SliverFixedExtentList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: items.length,
+                (context, index) => Container(
+                  child: Text(
+                    items[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              itemExtent: 30,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+            ),
+            sliver: SliverPersistentHeader(
+                delegate: CustomDelegate(), pinned: true),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              // vertical: 10,
+            ),
+            sliver: SliverFixedExtentList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: items.length,
+                (context, index) => Container(
+                  child: Text(
+                    items[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              itemExtent: 30,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+            ),
+            sliver: SliverPersistentHeader(
+                delegate: CustomDelegate(), pinned: true),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              // vertical: 10,
+            ),
+            sliver: SliverFixedExtentList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: items.length,
+                (context, index) => Container(
+                  child: Text(
+                    items[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              itemExtent: 30,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+            ),
+            sliver: SliverPersistentHeader(
+                delegate: CustomDelegate(), pinned: true),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              // vertical: 10,
+            ),
+            sliver: SliverFixedExtentList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: items.length,
+                (context, index) => Container(
+                  child: Text(
+                    items[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              itemExtent: 30,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+            ),
+            sliver: SliverPersistentHeader(
+                delegate: CustomDelegate(), pinned: true),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              // vertical: 10,
+            ),
+            sliver: SliverFixedExtentList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: items.length,
+                (context, index) => Container(
+                  child: Text(
+                    items[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              itemExtent: 30,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+            ),
+            sliver: SliverPersistentHeader(
+                delegate: CustomDelegate(), pinned: true),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              // vertical: 10,
+            ),
+            sliver: SliverFixedExtentList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: items.length,
+                (context, index) => Container(
+                  child: Text(
+                    items[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              itemExtent: 30,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+            ),
+            sliver: SliverPersistentHeader(
+                delegate: CustomDelegate(), pinned: true),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: sliverHorizontalGaps,
+              // vertical: 10,
+            ),
+            sliver: SliverFixedExtentList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: items.length,
+                (context, index) => Container(
+                  child: Text(
+                    items[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              itemExtent: 30,
+            ),
+          ),
         ],
       ),
     );
+  }
+}
+
+class CustomDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return FractionallySizedBox(
+      heightFactor: 1,
+      child: Container(
+        color: Colors.black,
+        child: Text(
+          '배당 및 세금',
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 30;
+
+  @override
+  double get minExtent => 30;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }

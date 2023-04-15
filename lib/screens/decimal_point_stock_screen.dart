@@ -82,112 +82,113 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
       body: DefaultTabController(
         length: 2,
         child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 8,
-            ),
-            child: Column(
-              children: [
-                TextField(
-                  controller: _controller,
-                  style: TextStyle(
-                    color: Colors.white,
+          padding: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 8,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                controller: _controller,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                decoration: InputDecoration(
+                  hintText: '종목명을 입력해 주세요.',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
                   ),
-                  decoration: InputDecoration(
-                    hintText: '종목명을 입력해 주세요.',
-                    hintStyle: TextStyle(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
                       color: Colors.grey,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 1,
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Theme.of(context).primaryColor,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 1,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                resultItems.isEmpty
-                    ? Expanded(
-                        child: Column(
-                          children: [
-                            TabBar(
-                              indicatorColor: Theme.of(context).primaryColor,
-                              unselectedLabelColor: Colors.white,
-                              labelColor: Theme.of(context).primaryColor,
-                              tabs: [
-                                Tab(
-                                  text: '국내소수점',
+              ),
+              resultItems.isEmpty
+                  ? Expanded(
+                      child: Column(
+                        children: [
+                          TabBar(
+                            indicatorColor: Theme.of(context).primaryColor,
+                            unselectedLabelColor: Colors.white,
+                            labelColor: Theme.of(context).primaryColor,
+                            tabs: [
+                              Tab(
+                                text: '국내소수점',
+                              ),
+                              Tab(
+                                text: '해외소수점',
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: TabBarView(
+                              children: [
+                                ListView(
+                                  children: items1
+                                      .map(
+                                        (e) => ListTile(
+                                          leading: CircleAvatar(),
+                                          title: Text(
+                                            e,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
                                 ),
-                                Tab(
-                                  text: '해외소수점',
+                                ListView(
+                                  children: items2
+                                      .map(
+                                        (e) => ListTile(
+                                          leading: CircleAvatar(),
+                                          title: Text(
+                                            e,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
                                 ),
                               ],
                             ),
-                            Expanded(
-                              child: TabBarView(
-                                children: [
-                                  ListView(
-                                    children: items1
-                                        .map(
-                                          (e) => ListTile(
-                                            leading: CircleAvatar(),
-                                            title: Text(
-                                              e,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                        .toList(),
-                                  ),
-                                  ListView(
-                                    children: items2
-                                        .map(
-                                          (e) => ListTile(
-                                            leading: CircleAvatar(),
-                                            title: Text(
-                                              e,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                        .toList(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : Expanded(
-                        child: ListView(
-                          children: resultItems
-                              .map(
-                                (e) => ListTile(
-                                  title: Text(
-                                    e,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Expanded(
+                      child: ListView(
+                        children: resultItems
+                            .map(
+                              (e) => ListTile(
+                                title: Text(
+                                  e,
+                                  style: TextStyle(
+                                    color: Colors.white,
                                   ),
                                 ),
-                              )
-                              .toList(),
-                        ),
+                              ),
+                            )
+                            .toList(),
                       ),
-              ],
-            )),
+                    ),
+            ],
+          ),
+        ),
       ),
     );
   }
