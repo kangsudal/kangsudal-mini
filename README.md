@@ -75,7 +75,9 @@ https://kangsudal-mini.web.app/#/
   }
 ```
 <br/>
+
 **찜한주식에서 상세페이지로 넘어갈때 넘겨주는 객체**
+
 ```
 class Stock {
   double price;
