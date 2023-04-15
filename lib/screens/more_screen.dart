@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kangsudal_mini/screens/auth_screen.dart';
 import 'package:kangsudal_mini/screens/create_account_screen.dart';
+import 'package:kangsudal_mini/state/page_index.dart';
 
-class MoreScreen extends StatelessWidget {
+class MoreScreen extends ConsumerWidget {
   const MoreScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double sliverHorizontalGaps = 25;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -62,11 +64,17 @@ class MoreScreen extends StatelessWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => AuthScreen(),
-                              ),
-                            ),
+                            onTap: () {
+                              if (ref.watch(isLogin) == false) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => AuthScreen(),
+                                  ),
+                                );
+                              }else{
+                                ref.read(isLogin.notifier).update((state) => false);
+                              }
+                            },
                             child: Container(
                               padding: EdgeInsets.all(5),
                               decoration: BoxDecoration(
@@ -76,7 +84,7 @@ class MoreScreen extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                '로그인',
+                                ref.watch(isLogin) == false ? '로그인' : '로그아웃',
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 10,
