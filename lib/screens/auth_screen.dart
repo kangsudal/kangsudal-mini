@@ -70,28 +70,28 @@ class AuthScreen extends ConsumerWidget {
                 SizedBox(
                   height: 30,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 80,
-                    vertical: 13,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Theme.of(context).primaryColor,
+                GestureDetector(
+                  onTap: () {
+                    ref.read(isLogin.notifier).update((state) => true);
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 80,
+                      vertical: 13,
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: GestureDetector(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     child: Text(
                       '간편인증 로그인',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
-                    onTap: () {
-                      ref.read(isLogin.notifier).update((state) => true);
-                      Navigator.of(context).pop();
-                    },
                   ),
                 ),
               ],
