@@ -63,7 +63,7 @@ class AuthScreen extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 80,
-                    vertical: 5,
+                    vertical: 13,
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kangsudal_mini/screens/AuthScreen.dart';
-import 'package:kangsudal_mini/screens/CreateAccountScreen.dart';
+import 'package:kangsudal_mini/screens/auth_screen.dart';
+import 'package:kangsudal_mini/screens/create_account_screen.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);

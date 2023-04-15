@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kangsudal_mini/screens/HomeScreen.dart';
+import 'package:kangsudal_mini/screens/create_account_screen.dart';
+import 'package:kangsudal_mini/screens/home_screen.dart';
 import 'package:rive/rive.dart';
 
 void main() {
@@ -95,12 +96,21 @@ class StartPage extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             SizedBox(
-              height: 10,
+              height: 25,
             ),
-            Text(
-              'KB증권이 처음이신가요?',
-              style: TextStyle(
-                color: Colors.grey,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CreateAccountScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                'KB증권이 처음이신가요?',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
               ),
             ),
           ],

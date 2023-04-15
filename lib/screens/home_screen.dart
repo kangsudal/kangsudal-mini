@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kangsudal_mini/screens/AuthScreen.dart';
-import 'package:kangsudal_mini/screens/CreateAccountScreen.dart';
-import 'package:kangsudal_mini/screens/MoreScreen.dart';
+import 'package:kangsudal_mini/screens/auth_screen.dart';
+import 'package:kangsudal_mini/screens/create_account_screen.dart';
+import 'package:kangsudal_mini/screens/more_screen.dart';
 import 'package:kangsudal_mini/state/page_index.dart';
 
 class HomeScreen extends ConsumerWidget {
