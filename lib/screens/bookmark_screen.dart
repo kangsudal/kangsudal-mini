@@ -7,10 +7,22 @@ class BookMarkScreen extends StatelessWidget {
   BookMarkScreen({Key? key}) : super(key: key);
 
   List<Stock> stocks = [
-    Stock(name: '호멜 푸즈', price: 39.26, updownPrice: 0.61, updownPercent: 1.54),
-    Stock(name: '호멜 푸즈', price: 39.26, updownPrice: 0.61, updownPercent: 1.54),
-    Stock(name: '호멜 푸즈', price: 39.26, updownPrice: 0.61, updownPercent: 1.54),
-    Stock(name: '호멜 푸즈', price: 39.26, updownPrice: 0.61, updownPercent: 1.54),
+    Stock(
+      name: '호멜 푸즈',
+      price: 39.26,
+      updownPrice: 0.61,
+      updownPercent: 1.54,
+      isUp: false,
+      ticker: 'HRL',
+    ),
+    Stock(
+      name: 'JPM 제이피모간 체이스',
+      price: 138.73,
+      updownPrice: 9.74,
+      updownPercent: 7.55,
+      isUp: true,
+      ticker: 'JPM',
+    ),
   ];
 
   @override
@@ -47,6 +59,7 @@ class BookMarkScreen extends StatelessWidget {
                     FaIcon(
                       FontAwesomeIcons.seedling,
                       color: Colors.green,
+                      size: 10,
                     ),
                   ],
                 ),
@@ -66,15 +79,21 @@ class BookMarkScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             FaIcon(
-                              FontAwesomeIcons.caretDown,
-                              color: Colors.blue,
-                              size: 10,
+                              stock.isUp == true
+                                  ? FontAwesomeIcons.caretUp
+                                  : FontAwesomeIcons.caretDown,
+                              color: stock.isUp == true
+                                  ? Colors.redAccent
+                                  : Colors.indigo,
+                              size: 12,
                             ),
                             Text(
                               '\$${stock.updownPrice}(${stock.updownPercent}%)',
                               style: TextStyle(
-                                color: Colors.indigo,
-                                fontSize: 10,
+                                color: stock.isUp == true
+                                    ? Colors.redAccent
+                                    : Colors.indigo,
+                                fontSize: 12,
                               ),
                             ),
                           ],
@@ -96,11 +115,15 @@ class Stock {
   String name;
   double updownPrice;
   double updownPercent;
+  bool isUp;
+  String ticker;
 
   Stock({
     required this.name,
     required this.price,
     required this.updownPrice,
     required this.updownPercent,
+    required this.isUp,
+    required this.ticker,
   });
 }
