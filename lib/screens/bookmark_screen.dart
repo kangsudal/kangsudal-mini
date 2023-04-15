@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kangsudal_mini/models/stock.dart';
 
 import 'DetailScreen.dart';
 
@@ -14,6 +15,7 @@ class BookMarkScreen extends StatelessWidget {
       updownPercent: 1.54,
       isUp: false,
       ticker: 'HRL',
+      isKor: false,
     ),
     Stock(
       name: 'JPM 제이피모간 체이스',
@@ -22,6 +24,7 @@ class BookMarkScreen extends StatelessWidget {
       updownPercent: 7.55,
       isUp: true,
       ticker: 'JPM',
+      isKor: false,
     ),
   ];
 
@@ -108,22 +111,4 @@ class BookMarkScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class Stock {
-  double price; //현재가격
-  String name; //주식이름
-  double updownPrice; //등락금액
-  double updownPercent; //등락률
-  bool isUp; //상승세인지
-  String ticker; //주식 ticker
-
-  Stock({
-    required this.name,
-    required this.price,
-    required this.updownPrice,
-    required this.updownPercent,
-    required this.isUp,
-    required this.ticker,
-  });
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kangsudal_mini/models/stock.dart';
+import 'package:kangsudal_mini/screens/DetailScreen.dart';
 
 class DecimalPointStockScreen extends StatefulWidget {
   DecimalPointStockScreen({Key? key}) : super(key: key);
@@ -10,21 +12,69 @@ class DecimalPointStockScreen extends StatefulWidget {
 
 class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
   TextEditingController _controller = TextEditingController();
-  List<String> koreaStockList = [
-    '삼성전자',
-    'SK하이닉스',
-    'LG에너지솔루션',
+  List<Stock> koreaStockList = [
+    Stock(
+      name: '삼성전자',
+      price: 65000,
+      updownPrice: 1000,
+      updownPercent: 1.51,
+      isUp: false,
+      ticker: '005930',
+      isKor: true,
+    ),
+    Stock(
+      name: 'SK하이닉스',
+      price: 89000,
+      updownPrice: 600,
+      updownPercent: 0.68,
+      isUp: true,
+      ticker: '000660',
+      isKor: true,
+    ),
+    Stock(
+      name: 'LG에너지솔루션',
+      price: 594000,
+      updownPrice: 5000,
+      updownPercent: 0.83,
+      isUp: false,
+      ticker: '373220',
+      isKor: true,
+    ),
   ];
 
-  List<String> abroadStockList = [
-    '제이피모간 체이스',
-    '뱅크오브아메리카',
-    '호멜푸드',
+  List<Stock> abroadStockList = [
+    Stock(
+      name: '제이피모간 체이스',
+      price: 138.73,
+      updownPrice: 9.74,
+      updownPercent: 7.55,
+      isUp: true,
+      ticker: 'JPM',
+      isKor: false,
+    ),
+    Stock(
+      name: '뱅크오브아메리카',
+      price: 29.52,
+      updownPrice: 0.96,
+      updownPercent: 3.36,
+      isUp: true,
+      ticker: 'BAC',
+      isKor: false,
+    ),
+    Stock(
+      name: '호멜푸드',
+      price: 39.26,
+      updownPrice: 0.61,
+      updownPercent: 1.54,
+      isUp: false,
+      ticker: 'HRL',
+      isKor: false,
+    ),
   ];
 
-  List items1 = [];
-  List items2 = [];
-  List<String> resultItems = [];
+  List<Stock> items1 = [];
+  List<Stock> items2 = [];
+  List<Stock> resultItems = [];
 
   @override
   void initState() {
@@ -35,12 +85,12 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
 
     _controller.addListener(() {
       String searchWord = _controller.text;
-      List<String> resultItems1 = koreaStockList.where((element) {
-        return element.contains(searchWord);
+      List<Stock> resultItems1 = koreaStockList.where((element) {
+        return element.name.contains(searchWord);
       }).toList();
 
-      List<String> resultItems2 = abroadStockList.where((element) {
-        return element.contains(searchWord);
+      List<Stock> resultItems2 = abroadStockList.where((element) {
+        return element.name.contains(searchWord);
       }).toList();
 
       setState(() {
@@ -117,9 +167,17 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                                   children: items1
                                       .map(
                                         (e) => ListTile(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailScreen(stock: e),
+                                              ),
+                                            );
+                                          },
                                           leading: CircleAvatar(),
                                           title: Text(
-                                            e,
+                                            e.name,
                                             style: TextStyle(
                                               color: Colors.white,
                                             ),
@@ -132,9 +190,17 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                                   children: items2
                                       .map(
                                         (e) => ListTile(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailScreen(stock: e),
+                                              ),
+                                            );
+                                          },
                                           leading: CircleAvatar(),
                                           title: Text(
-                                            e,
+                                            e.name,
                                             style: TextStyle(
                                               color: Colors.white,
                                             ),
@@ -154,8 +220,16 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                         children: resultItems
                             .map(
                               (e) => ListTile(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailScreen(stock: e),
+                                    ),
+                                  );
+                                },
                                 title: Text(
-                                  e,
+                                  e.name,
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),

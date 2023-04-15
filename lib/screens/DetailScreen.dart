@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kangsudal_mini/screens/bookmark_screen.dart';
+import 'package:kangsudal_mini/models/stock.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -49,14 +49,23 @@ class DetailScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '\$${stock.price}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    ),
-                  ),
+                  stock.isKor
+                      ? Text(
+                          '${stock.price} 원',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        )
+                      : Text(
+                          '\$${stock.price}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
                   //시간되면 환전버튼
                   // Placeholder(
                   //   fallbackWidth: 10,
@@ -75,18 +84,30 @@ class DetailScreen extends StatelessWidget {
                           FontAwesomeIcons.caretDown,
                           color: Colors.blueAccent,
                         ),
-                  Text(
-                    '\$${stock.price}(${stock.updownPercent}%)',
-                    style: TextStyle(
-                      color: stock.isUp ? Colors.redAccent : Colors.blueAccent,
+                  stock.isKor
+                      ? Text(
+                          '${stock.updownPrice}원(${stock.updownPercent}%)',
+                          style: TextStyle(
+                            color: stock.isUp
+                                ? Colors.redAccent
+                                : Colors.blueAccent,
+                          ),
+                        )
+                      : Text(
+                          '\$${stock.updownPrice}(${stock.updownPercent}%)',
+                          style: TextStyle(
+                            color: stock.isUp
+                                ? Colors.redAccent
+                                : Colors.blueAccent,
+                          ),
+                        ),
+                  if (stock.isKor == false)
+                    Text(
+                      '· 환율 $currentCurrency원',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '· 환율 $currentCurrency원',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
                 ],
               ),
               SizedBox(
@@ -144,14 +165,16 @@ class DetailScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               // color: Colors.grey,
               child: Row(
-mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CupertinoButton(
                     onPressed: () {},
                     child: Text('판매하기'),
                     color: Colors.blueAccent,
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   CupertinoButton(
                     onPressed: () {},
                     child: Text('구매하기'),
