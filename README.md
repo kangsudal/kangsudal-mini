@@ -14,6 +14,7 @@ https://kangsudal-mini.web.app/#/
 <br/>
 
 ## 구현영상
+https://blog.naver.com/kangsudal-dev
 
 <br/>
 <br/>
