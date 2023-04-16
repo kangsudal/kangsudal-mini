@@ -24,6 +24,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.yellowAccent,
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: Colors.grey,
+              displayColor: Colors.grey,
+            ),
       ),
       home: const StartPage(),
     );

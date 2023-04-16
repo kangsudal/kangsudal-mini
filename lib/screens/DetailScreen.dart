@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kangsudal_mini/models/stock.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:kangsudal_mini/screens/trading_screen.dart';
 
 class DetailScreen extends StatelessWidget {
   Stock stock;
@@ -168,7 +169,14 @@ class DetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CupertinoButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TradingScreen(isSell: true, stock: stock),
+                        ),
+                      );
+                    },
                     child: Text('판매하기'),
                     color: Colors.blueAccent,
                   ),
