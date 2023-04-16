@@ -203,9 +203,9 @@ class _TradingScreenState extends State<TradingScreen> {
                   Color color;
                   double d; //공차
                   if (widget.stock.isKor) {
-                    d = 100;
+                    d = -100;
                   } else {
-                    d = 0.5;
+                    d = -0.5;
                   }
                   if (idx < 10) {
                     color = Color(0xff1d2358);
