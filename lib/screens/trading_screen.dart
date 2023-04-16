@@ -19,6 +19,13 @@ class TradingScreen extends StatefulWidget {
 
 class _TradingScreenState extends State<TradingScreen> {
   int shares = 0;
+  late double desiredPrice;
+
+  @override
+  void initState() {
+    super.initState();
+    desiredPrice = widget.stock.price;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +120,23 @@ class _TradingScreenState extends State<TradingScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FaIcon(
-                  FontAwesomeIcons.minus,
-                  color: Colors.grey,
-                  size: 15,
+                SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: IconButton(
+                    onPressed: () {
+                      if (shares > 0) {
+                        setState(() {
+                          shares--;
+                        });
+                      }
+                    },
+                    icon: FaIcon(
+                      FontAwesomeIcons.minus,
+                      color: Colors.grey,
+                      size: 15,
+                    ),
+                  ),
                 ),
                 Text(
                   shares.toString(),
@@ -125,10 +145,21 @@ class _TradingScreenState extends State<TradingScreen> {
                     fontSize: 18,
                   ),
                 ),
-                FaIcon(
-                  FontAwesomeIcons.plus,
-                  color: Colors.grey,
-                  size: 15,
+                SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        shares++;
+                      });
+                    },
+                    icon: FaIcon(
+                      FontAwesomeIcons.plus,
+                      color: Colors.grey,
+                      size: 15,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -155,26 +186,58 @@ class _TradingScreenState extends State<TradingScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FaIcon(
-                  FontAwesomeIcons.minus,
-                  color: Colors.grey,
-                  size: 15,
+                SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: IconButton(
+                    onPressed: () {
+                      if (desiredPrice > 0) {
+                        setState(() {
+                          if (stock.isKor) {
+                            desiredPrice -= 100;
+                          } else {
+                            desiredPrice -= 0.5;
+                          }
+                        });
+                      }
+                    },
+                    icon: FaIcon(
+                      FontAwesomeIcons.minus,
+                      color: Colors.grey,
+                      size: 15,
+                    ),
+                  ),
                 ),
                 Text(
-                  shares.toString(),
+                  desiredPrice.toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                   ),
                 ),
-                FaIcon(
-                  FontAwesomeIcons.plus,
-                  color: Colors.grey,
-                  size: 15,
+                SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        if (stock.isKor) {
+                          desiredPrice += 100;
+                        } else {
+                          desiredPrice += 0.5;
+                        }
+                      });
+                    },
+                    icon: FaIcon(
+                      FontAwesomeIcons.plus,
+                      color: Colors.grey,
+                      size: 15,
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
