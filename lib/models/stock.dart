@@ -16,4 +16,9 @@ class Stock {
     required this.ticker,
     required this.isKor,
   });
+
+  @override
+  String toString() {
+    return 'Stock{price: $price, name: $name, updownPrice: $updownPrice, updownPercent: $updownPercent, isUp: $isUp, ticker: $ticker, isKor: $isKor}';
+  }
 }

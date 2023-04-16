@@ -72,16 +72,12 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
     ),
   ];
 
-  List<Stock> items1 = [];
-  List<Stock> items2 = [];
   List<Stock> resultItems = [];
 
   @override
   void initState() {
     super.initState();
     //초기데이터 설정
-    items1 = koreaStockList;
-    items2 = abroadStockList;
 
     _controller.addListener(() {
       String searchWord = _controller.text;
@@ -95,7 +91,7 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
 
       setState(() {
         resultItems = resultItems1 + resultItems2;
-        print(resultItems);
+        // print(resultItems);
       });
     });
   }
@@ -143,105 +139,110 @@ class _DecimalPointStockScreenState extends State<DecimalPointStockScreen> {
                   ),
                 ),
               ),
-              resultItems.isEmpty
-                  ? Expanded(
-                      child: Column(
-                        children: [
-                          TabBar(
-                            indicatorColor: Theme.of(context).primaryColor,
-                            unselectedLabelColor: Colors.white,
-                            labelColor: Theme.of(context).primaryColor,
-                            tabs: [
-                              Tab(
-                                text: '국내소수점',
-                              ),
-                              Tab(
-                                text: '해외소수점',
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: TabBarView(
-                              children: [
-                                ListView(
-                                  children: items1
-                                      .map(
-                                        (e) => ListTile(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DetailScreen(stock: e),
-                                              ),
-                                            );
-                                          },
-                                          leading: CircleAvatar(),
-                                          title: Text(
-                                            e.name,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
-                                ),
-                                ListView(
-                                  children: items2
-                                      .map(
-                                        (e) => ListTile(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DetailScreen(stock: e),
-                                              ),
-                                            );
-                                          },
-                                          leading: CircleAvatar(),
-                                          title: Text(
-                                            e.name,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Expanded(
-                      child: ListView(
-                        children: resultItems
-                            .map(
-                              (e) => ListTile(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          DetailScreen(stock: e),
-                                    ),
-                                  );
-                                },
-                                title: Text(
-                                  e.name,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ),
+              _controller.text.isEmpty
+                  ? showTabBarTabBarView()
+                  : showResultList(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget showTabBarTabBarView() {
+    return Expanded(
+      child: Column(
+        children: [
+          TabBar(
+            indicatorColor: Theme.of(context).primaryColor,
+            unselectedLabelColor: Colors.white,
+            labelColor: Theme.of(context).primaryColor,
+            tabs: [
+              Tab(
+                text: '국내소수점',
+              ),
+              Tab(
+                text: '해외소수점',
+              ),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                ListView(
+                  children: koreaStockList
+                      .map(
+                        (e) => ListTile(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DetailScreen(stock: e),
+                              ),
+                            );
+                          },
+                          leading: CircleAvatar(),
+                          title: Text(
+                            e.name,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+                ListView(
+                  children: abroadStockList
+                      .map(
+                        (e) => ListTile(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DetailScreen(stock: e),
+                              ),
+                            );
+                          },
+                          leading: CircleAvatar(),
+                          title: Text(
+                            e.name,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget showResultList() {
+    return Expanded(
+      child: ListView(
+        children: resultItems
+            .map(
+              (e) => ListTile(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DetailScreen(stock: e),
+                    ),
+                  );
+                },
+                title: Text(
+                  e.name,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
+            .toList(),
       ),
     );
   }
