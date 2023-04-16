@@ -184,7 +184,14 @@ class DetailScreen extends StatelessWidget {
                     width: 10,
                   ),
                   CupertinoButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TradingScreen(isSell: false, stock: stock),
+                        ),
+                      );
+                    },
                     child: Text('구매하기'),
                     color: Colors.redAccent,
                   ),

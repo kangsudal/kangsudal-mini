@@ -18,7 +18,7 @@ class BookMarkScreen extends StatelessWidget {
       isKor: false,
     ),
     Stock(
-      name: 'JPM 제이피모간 체이스',
+      name: '제이피모간 체이스',
       price: 138.73,
       updownPrice: 9.74,
       updownPercent: 7.55,
@@ -33,6 +33,7 @@ class BookMarkScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           '찜한주식',
           style: TextStyle(color: Colors.white),
