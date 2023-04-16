@@ -101,5 +101,6 @@ class Stock {
 
 ```
 
-isUp => DetailScreen의 그래프 색상, caret 아이콘 방향, 등락금액(등락률) 텍스트 색상 결정
-isKor => DetailScreen의 $와 원 표시 결정
+isUp => DetailScreen의 그래프 색상(true 빨간색,false 파랑색)/ caret 아이콘 방향(true:▲)/ 등락금액(등락률) 텍스트 색상 결정
+<br/>
+isKor => DetailScreen의 $와 원 표시 결정(true 원, false 달러)
