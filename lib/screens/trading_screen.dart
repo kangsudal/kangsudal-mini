@@ -20,6 +20,7 @@ class TradingScreen extends StatefulWidget {
 class _TradingScreenState extends State<TradingScreen> {
   int shares = 0;
   late double desiredPrice;
+  String totalPrice = '';
 
   @override
   void initState() {
@@ -61,7 +62,7 @@ class _TradingScreenState extends State<TradingScreen> {
               height: 40,
               color: Color(0xff1d2358),
               child: Center(
-                child: Text('판매'),
+                child: Text('${totalPrice} 판매'),
               ),
             )
           else
@@ -71,7 +72,7 @@ class _TradingScreenState extends State<TradingScreen> {
               height: 40,
               color: Color(0xff3e1d2a),
               child: Center(
-                child: Text('구매'),
+                child: Text('${totalPrice} 구매'),
               ),
             ),
         ],
@@ -128,6 +129,7 @@ class _TradingScreenState extends State<TradingScreen> {
                       if (shares > 0) {
                         setState(() {
                           shares--;
+                          totalPrice = (shares * desiredPrice).toString();
                         });
                       }
                     },
@@ -152,6 +154,7 @@ class _TradingScreenState extends State<TradingScreen> {
                     onPressed: () {
                       setState(() {
                         shares++;
+                        totalPrice = (shares * desiredPrice).toString();
                       });
                     },
                     icon: FaIcon(
@@ -265,25 +268,34 @@ class _TradingScreenState extends State<TradingScreen> {
                   double price = widget.stock.price;
                   Color color;
                   double d; //공차
+                  double cellPrice = 0;
                   if (widget.stock.isKor) {
                     d = -100;
                   } else {
                     d = -0.5;
                   }
+                  // -9 * d + price : 첫째항, idx : n
+                  // 등차수열 a_n = 첫째항+d(n-1)
+                  cellPrice = (-9 * d + price + d * (idx - 1));
                   if (idx < 10) {
                     color = Color(0xff1d2358);
                   } else {
                     color = Color(0xff3e1d2a);
                   }
-                  return Container(
-                    color: color,
-                    height: 40,
-                    child: Text(
-                      (-9 * d + price + d * (idx - 1)).toStringAsFixed(2),
-                      // toStringAsFixed : 소수점 2자리수
-                      // -9 * d + price : 첫째항, idx : n
-                      // 등차수열 a_n = 첫째항+d(n-1)
-                      textAlign: TextAlign.right,
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        desiredPrice = cellPrice;
+                      });
+                    },
+                    child: Container(
+                      color: color,
+                      height: 40,
+                      child: Text(
+                        cellPrice.toStringAsFixed(2),
+                        // toStringAsFixed : 소수점 2자리수
+                        textAlign: TextAlign.right,
+                      ),
                     ),
                   );
                 },
